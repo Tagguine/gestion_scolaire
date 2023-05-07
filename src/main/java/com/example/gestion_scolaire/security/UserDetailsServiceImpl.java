@@ -16,25 +16,22 @@ import java.util.stream.Collectors;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
-    @Autowired
     private SecurityService securityService;
 
-    /*public UserDetailsServiceImpl(SecurityService securityService) {
+    public UserDetailsServiceImpl(SecurityService securityService) {
         this.securityService = securityService;
-    }*/
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         AppUser appUser = securityService.loadUserByUsername(username);
 
-        //en utilisant l'API des streams
         Collection<GrantedAuthority> authorities1 = appUser
                 .getAppRoles()
                 .stream()
                 .map(role-> new SimpleGrantedAuthority(role.getRoleName()))
                 .collect(Collectors.toList());
 
-        User user = new User(appUser.getUsername(),appUser.getPassword(),authorities1);
-        return user;
+        return new User(appUser.getUsername(),appUser.getPassword(),authorities1);
     }
 }

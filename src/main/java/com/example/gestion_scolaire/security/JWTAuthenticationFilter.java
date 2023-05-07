@@ -22,14 +22,13 @@ import java.util.List;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     private AuthenticationManager authenticationManager;
-
     public JWTAuthenticationFilter(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
     }
 
 
     @Override
-    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
+    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) {
         try {
             AppUser appUser= new ObjectMapper().readValue(request.getInputStream(),AppUser.class);
             return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(appUser.getUsername(),appUser.getPassword()));
@@ -44,10 +43,8 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                                             FilterChain chain, Authentication authResult) throws IOException, ServletException {
         User user=(User)authResult.getPrincipal();
         List<String> roles=new ArrayList<>();
-        authResult.getAuthorities().forEach(a->{
-            roles.add(a.getAuthority());
-        });
-        String jwt= JWT.create()
+        authResult.getAuthorities().forEach(a-> roles.add(a.getAuthority()));
+        String jwt = JWT.create()
                 .withIssuer(request.getRequestURI())
                 .withSubject(user.getUsername())
                 .withArrayClaim("roles",roles.toArray(new String[roles.size()]))

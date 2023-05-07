@@ -9,11 +9,8 @@ import lombok.Data;
 public class EnseignantDto {
 
     private Long id;
-
     private String nom;
-
     private String prenom;
-
     public static EnseignantDto fromEntity(Enseignant enseignant) {
         if (enseignant == null) {
             return null;
@@ -26,9 +23,7 @@ public class EnseignantDto {
     }
 
     public static Enseignant toEntity(EnseignantDto dto) {
-        if (dto == null) {
-            return null;
-        }
+        if (dto == null) return null;
         return Enseignant.builder()
                 .id(dto.getId())
                 .prenom(dto.getPrenom())

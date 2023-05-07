@@ -3,6 +3,7 @@ package com.example.gestion_scolaire;
 import com.example.gestion_scolaire.entities.Classe;
 import com.example.gestion_scolaire.entities.Etudiant;
 import com.example.gestion_scolaire.dao.EtudiantRepository;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,7 +18,7 @@ public class GestionStagiaireApplicationTests {
         @Autowired
         private EtudiantRepository etudiantRepository;
 
-        @org.junit.Test
+        @Test
         public void shouldSaveCategoryWithSuccess() {
             Classe classe1=Classe.builder()
                     .nom("classe1")

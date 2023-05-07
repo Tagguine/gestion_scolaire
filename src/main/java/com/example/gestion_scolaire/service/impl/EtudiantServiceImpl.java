@@ -22,13 +22,9 @@ import java.util.stream.Collectors;
 @Slf4j
 public class EtudiantServiceImpl implements EtudiantService {
     private EtudiantRepository etudiantRepository;
-    private ClasseRepository classeRepository;
-    private EnseignantRepository enseignantRepository;
 
     public EtudiantServiceImpl(EtudiantRepository etudiantRepository, ClasseRepository classeRepository, EnseignantRepository enseignantRepository) {
         this.etudiantRepository = etudiantRepository;
-        this.classeRepository = classeRepository;
-        this.enseignantRepository = enseignantRepository;
     }
 
     @Override
@@ -50,8 +46,7 @@ public class EtudiantServiceImpl implements EtudiantService {
                 .collect(Collectors.toList());
         long totalEtudiants = etudiantDtos.stream().count();
         Pageable pageableEtudiants = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize());
-        Page<EtudiantDto> pageEtudiants = new PageImpl<>(etudiantDtos, pageableEtudiants, totalEtudiants);
-        return pageEtudiants;
+        return new PageImpl<>(etudiantDtos, pageableEtudiants, totalEtudiants);
     }
 
     @Override
@@ -72,8 +67,7 @@ public class EtudiantServiceImpl implements EtudiantService {
 
         long totalEtudiants = etudiantDtos.stream().count();
         Pageable pageableEtudiants = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize());
-        Page<EtudiantDto> pageEtudiants = new PageImpl<>(etudiantDtos, pageableEtudiants, totalEtudiants);
-        return pageEtudiants;
+        return new PageImpl<>(etudiantDtos, pageableEtudiants, totalEtudiants);
     }
 
     @Override
@@ -85,8 +79,7 @@ public class EtudiantServiceImpl implements EtudiantService {
 
         long totalEtudiants = etudiantDtos.stream().count();
         Pageable pageableEtudiants = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize());
-        Page<EtudiantDto> pageEtudiants = new PageImpl<>(etudiantDtos, pageableEtudiants, totalEtudiants);
-        return pageEtudiants;
+        return new PageImpl<>(etudiantDtos, pageableEtudiants, totalEtudiants);
     }
 
     @Override
@@ -98,7 +91,6 @@ public class EtudiantServiceImpl implements EtudiantService {
 
         long totalEtudiants = etudiantDtos.stream().count();
         Pageable pageableEtudiants = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize());
-        Page<EtudiantDto> pageEtudiants = new PageImpl<>(etudiantDtos, pageableEtudiants, totalEtudiants);
-        return pageEtudiants;
+        return new PageImpl<>(etudiantDtos, pageableEtudiants, totalEtudiants);
     }
 }
